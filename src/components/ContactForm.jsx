@@ -3,10 +3,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import toast from 'react-hot-toast';
 import { PiUserCirclePlusLight, PiUserCircleLight, PiPhoneLight } from 'react-icons/pi';
-import { selectContacts } from '../redux/selectors';
-import { addContact } from '../redux/operations';
+import { selectContacts } from '../redux/contacts/selectors';
+import { addContact } from '../redux/contacts/operations';
 
 const schema = Yup.object({
   name: Yup.string()
@@ -16,7 +16,7 @@ const schema = Yup.object({
       'Name may contain only letters, apostrophe, dash, and spaces.'
     )
     .required('This is a required field'),
-  phone: Yup.string()
+  number: Yup.string()
     .matches(
       /^\+?\d{1,4}?[ .\-s]?(\(\d{1,3}?\))?([ .\-s]?\d{1,4}){1,4}$/,
       'Phone number must be digits and can contain spaces, dashes, parentheses, and can start with +'
@@ -38,18 +38,18 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
-  const onSubmit = ({ name, phone }) => {
+  const onSubmit = ({ name, number }) => {
     const nameExists = contacts.some(
       contact => contact.name.trim().toLowerCase() === name.trim().toLowerCase()
     );
-    const numberExists = contacts.some(contact => contact.phone === phone);
+    const numberExists = contacts.some(contact => contact.number === number);
     if (nameExists) {
-      Notify.warning(`${name}' is already in contacts.`);
+      toast.error(`${name}' is already in contacts.`);
     } else if (numberExists) {
-      Notify.warning(`${phone}' is already in contacts.`);
+      toast.error(`${number}' is already in contacts.`);
     } else {
-      dispatch(addContact({ id: nanoid(), name, phone }));
-      Notify.success(`${name} has been successfully added to your contacts`);
+      dispatch(addContact({ id: nanoid(), name, number }));
+      toast.success(`${name} has been successfully added to your contacts`);
       reset();
     }
   };
@@ -73,14 +73,14 @@ export const ContactForm = () => {
         <div className='flex flex-row items-center gap-2'>
           <PiPhoneLight />
           <input
-            {...register('phone')}
-            name='phone'
+            {...register('number')}
+            name='number'
             type='tel'
             className='rounded-lg pl-2 text-black'
             placeholder='Phone number'
           />
         </div>
-        <p>{errors.phone?.message}</p>
+        <p>{errors.number?.message}</p>
       </label>
       <button
         type='submit'

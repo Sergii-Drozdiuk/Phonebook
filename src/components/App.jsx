@@ -1,34 +1,47 @@
-import { ContactForm } from './ContactForm';
-import { Filter } from './Filter';
-import { ContactList } from './ContactList';
-import { FcBusinessContact } from 'react-icons/fc';
-import { PiAddressBookDuotone } from 'react-icons/pi';
-import { selectError, selectIsLoading } from '../redux/selectors';
+import { useEffect, lazy } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './Layout';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
+import { refreshUser } from '../redux/auth/operations';
+import { useAuth } from '../hooks/useAuth';
 import { Loader } from './Loader';
-import { Error } from './Error';
-import { useSelector } from 'react-redux';
 
-export function App() {
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-  return (
-    <>
-      {isLoading && <Loader />}
-      <div className='w-[310px] rounded-lg border p-3 min-[375px]:w-[365px]'>
-        <h1 className='mb-4 flex items-center justify-center gap-2 text-2xl'>
-          <FcBusinessContact />
-          Phonebook
-        </h1>
-        <ContactForm />
-        <h2 className='mb-4 flex items-center justify-center gap-2 text-xl'>
-          <PiAddressBookDuotone />
-          Contacts
-        </h2>
-        {error && <Error />}
-        <Filter />
-        <ContactList />
-        
-      </div>
-    </>
+const HomePage = lazy(() => import('../pages/Home'));
+const RegisterPage = lazy(() => import('../pages/Register'));
+const LoginPage = lazy(() => import('../pages/Login'));
+const ContactsPage = lazy(() => import('../pages/Contacts'));
+const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
+
+export const App = () => {
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <Loader />
+  ) : (
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route
+          path='/register'
+          element={<RestrictedRoute redirectTo='/contacts' component={<RegisterPage />} />}
+        />
+        <Route
+          path='/login'
+          element={<RestrictedRoute redirectTo='/contacts' component={<LoginPage />} />}
+        />
+        <Route
+          path='/contacts'
+          element={<PrivateRoute redirectTo='/login' component={<ContactsPage />} />}
+        />
+        <Route path='*' element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   );
-}
+};
