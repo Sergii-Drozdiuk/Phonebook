@@ -20,7 +20,7 @@ export default function Contacts() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className='flex justify-center gap-2'>
       {isLoading && <Loader />}
       <div className='w-[310px] rounded-lg border p-3 min-[375px]:w-[365px]'>
         <h1 className='mb-4 flex items-center justify-center gap-2 text-2xl'>
@@ -28,6 +28,8 @@ export default function Contacts() {
           Phonebook
         </h1>
         <ContactForm />
+      </div>
+      <div className='w-[310px] rounded-lg border p-3 min-[375px]:w-[365px]'>
         <h2 className='mb-4 flex items-center justify-center gap-2 text-xl'>
           <PiAddressBookDuotone />
           Contacts
@@ -36,6 +38,6 @@ export default function Contacts() {
         <Filter />
         <ContactList />
       </div>
-    </>
+    </div>
   );
 }

@@ -1,42 +1,18 @@
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import toast from 'react-hot-toast';
 import { PiUserCirclePlusLight, PiUserCircleLight, PiPhoneLight } from 'react-icons/pi';
 import { selectContacts } from '../redux/contacts/selectors';
 import { addContact } from '../redux/contacts/operations';
-
-const schema = Yup.object({
-  name: Yup.string()
-    .min(2, 'Too Short!')
-    .matches(
-      /^[a-zA-Zа-яА-Я]+([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*$/,
-      'Name may contain only letters, apostrophe, dash, and spaces.'
-    )
-    .required('This is a required field'),
-  number: Yup.string()
-    .matches(
-      /^\+?\d{1,4}?[ .\-s]?(\(\d{1,3}?\))?([ .\-s]?\d{1,4}){1,4}$/,
-      'Phone number must be digits and can contain spaces, dashes, parentheses, and can start with +'
-    )
-    .required('This is a required field')
-    .min(9, 'Please enter at least 9 characters'),
-});
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { useContactsFormValidation } from '../hooks/useContactFormValidation';
 
 export const ContactForm = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+  const { handleSubmit, reset, registerName, registerNumber, errorMessage } =
+    useContactsFormValidation();
 
   const onSubmit = ({ name, number }) => {
     const nameExists = contacts.some(
@@ -59,36 +35,39 @@ export const ContactForm = () => {
       <label className='flex flex-col items-center gap-2'>
         <div className='flex flex-row items-center gap-2'>
           <PiUserCircleLight />
-          <input
-            {...register('name')}
+          <TextField
+            {...registerName}
             name='name'
             type='text'
             className='rounded-lg pl-2 text-black'
-            placeholder='User name'
+            label='User name'
           />
         </div>
-        <p>{errors.name?.message}</p>
+        {errorMessage('name')}
       </label>
       <label className='flex flex-col items-center gap-2'>
         <div className='flex flex-row items-center gap-2'>
           <PiPhoneLight />
-          <input
-            {...register('number')}
+          <TextField
+            {...registerNumber}
             name='number'
             type='tel'
             className='rounded-lg pl-2 text-black'
-            placeholder='Phone number'
+            label='Phone number'
           />
         </div>
-        <p>{errors.number?.message}</p>
+        {errorMessage('number')}
       </label>
-      <button
+      <Button
         type='submit'
-        className='flex items-center justify-center gap-1 rounded-lg bg-emerald-500 px-2 py-[2px] hover:bg-emerald-700 active:bg-emerald-700'
+        fullWidth
+        variant='contained'
+        sx={{ mt: 3, mb: 2 }}
+        className='flex items-center justify-center gap-1'
       >
         <PiUserCirclePlusLight />
         Add contact
-      </button>
+      </Button>
     </form>
   );
 };

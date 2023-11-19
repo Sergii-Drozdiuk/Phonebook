@@ -14,6 +14,7 @@ export const ContactList = () => {
   }, [dispatch]);
 
   const visibleContacts = useSelector(selectVisibleContacts);
+
   const deleteContact = (id, name) => {
     toast.success(`${name} has been successfully deleted from your contacts`);
     return dispatch(delContact(id));
