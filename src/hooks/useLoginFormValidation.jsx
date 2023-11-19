@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 const schema = yup.object({
-  email: yup.string().email('Invalid email address').required('Email is required'),
+  email: yup.string().trim().email('Invalid email address').required('Email is required'),
   password: yup
     .string()
+    .trim()
     .required('Password is required')
     .min(6, 'Password must be at least 6 characters'),
 });

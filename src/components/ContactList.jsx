@@ -14,12 +14,11 @@ import { fetchContacts } from '../redux/contacts/operations';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
+  const visibleContacts = useSelector(selectVisibleContacts);
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
-
-  const visibleContacts = useSelector(selectVisibleContacts);
 
   const deleteContact = (id, name) => {
     toast.success(`${name} has been successfully deleted from your contacts`);

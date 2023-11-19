@@ -5,15 +5,17 @@ import { useForm } from 'react-hook-form';
 const schema = yup.object({
   name: yup
     .string()
+    .trim()
     .min(2, 'Too Short!')
     .matches(
       /^[a-zA-Zа-яА-Я]+([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*$/,
       'Name may contain only letters, apostrophe, dash, and spaces.'
     )
     .required('Name is required'),
-  email: yup.string().email('Invalid email').required('Email is required'),
+  email: yup.string().trim().email('Invalid email').required('Email is required'),
   password: yup
     .string()
+    .trim()
     .required('Password is required')
     .min(6, 'Password must be at least 6 characters'),
 });

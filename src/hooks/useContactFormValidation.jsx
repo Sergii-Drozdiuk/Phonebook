@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 const schema = yup.object({
   name: yup
     .string()
+    .trim()
     .min(2, 'Too Short!')
     .matches(
       /^[a-zA-Zа-яА-Я]+([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*$/,
@@ -13,6 +14,7 @@ const schema = yup.object({
     .required('Name is required'),
   number: yup
     .string()
+    .trim()
     .matches(
       /^\+?\d{1,4}?[ .\-s]?(\(\d{1,3}?\))?([ .\-s]?\d{1,4}){1,4}$/,
       'Phone number must be digits and can contain spaces, dashes, parentheses, and can start with +'

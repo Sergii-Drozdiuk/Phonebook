@@ -76,5 +76,3 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
     return thunkAPI.rejectWithValue(error.message);
   }
 });
-
-export const getCurrentUserThunk = createAsyncThunk('auth/getCurrentUser', refreshUser);

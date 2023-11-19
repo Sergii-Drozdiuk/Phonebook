@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
-import { getCurrentUserThunk } from '../redux/auth/operations';
+import { refreshUser } from '../redux/auth/operations';
 import { useAuth } from '../hooks/useAuth';
 import { Loader } from './Loader';
 
@@ -19,7 +19,7 @@ export const App = () => {
   const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    dispatch(getCurrentUserThunk());
+    dispatch(refreshUser());
   }, [dispatch]);
 
   return isRefreshing ? (
