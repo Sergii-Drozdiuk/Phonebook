@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 export const Error = () => {
   const error = useSelector(selectError);
-  toast.warning(`${error.message}`);
+  toast.error(`${error.message}`);
   return (
     <div>
       <p className='text-lg text-red-500'>Something went wrong, try reload the page.</p>

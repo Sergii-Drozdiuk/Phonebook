@@ -24,9 +24,10 @@ export const LoginForm = () => {
 
   const { handleSubmit, reset, registerEmail, registerPassword, errorMessage } =
     useLoginFormValidation();
+
   const onSubmit = ({ email, password }) => {
     dispatch(logIn({ email, password }));
-    toast.success(`User ${name} has been successfully created`);
+    toast.success('Login successful');
     reset();
   };
 

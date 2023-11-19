@@ -19,8 +19,10 @@ const defaultTheme = createTheme();
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
+
   const { handleSubmit, reset, registerName, registerEmail, registerPassword, errorMessage } =
     useRegisterFormValidation();
+
   const onSubmit = ({ name, email, password }) => {
     dispatch(register({ name, email, password }));
     toast.success(`User ${name} has been successfully created`);

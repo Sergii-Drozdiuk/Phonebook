@@ -1,4 +1,10 @@
-import { PiUserCircleMinusDuotone } from 'react-icons/pi';
+import {
+  PiUserCircleMinusDuotone,
+  PiUserRectangleDuotone,
+  PiUserCircleDuotone,
+  PiPhoneDuotone,
+  PiUserSwitchDuotone,
+} from 'react-icons/pi';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { useEffect } from 'react';
@@ -24,18 +30,35 @@ export const ContactList = () => {
     <ul className='sm:max-h-[70vh] overflow-y-auto scrollbar-none'>
       {visibleContacts.length ? (
         visibleContacts.map(({ id, name, number }) => (
-          <li key={id} className='mb-2 flex items-center justify-between gap-2'>
-            <div className='flex items-center justify-between w-10/12'>
-              <span className='w-1/2 text-sm overflow-hidden max-[375px]:text-xs'>{name}:</span>
-              <span className='overflow-hidden text-sm max-[375px]:text-xs'>{number}</span>
+          <li
+            key={id}
+            className='mb-2 py-1 border border-black flex items-center justify-around gap-2'
+          >
+            <PiUserRectangleDuotone style={{ fontSize: '50px' }} />
+            <div className='w-3/5'>
+              <span className='flex overflow-hidden'>
+                <PiUserCircleDuotone style={{ fontSize: '20px', marginRight: '8px' }} /> {name}
+              </span>
+              <span className='flex overflow-hidden '>
+                <PiPhoneDuotone style={{ fontSize: '20px', marginRight: '8px' }} /> {number}
+              </span>
             </div>
-            <button
-              type='button'
-              onClick={() => deleteContact(id, name)}
-              className='flex rounded-lg bg-rose-300 border border-black px-2 py-[2px] hover:bg-rose-500 active:bg-rose-500 max-[375px]:text-xs max-[375px]:gap-1'
-            >
-              <PiUserCircleMinusDuotone />
-            </button>
+            <div className='flex flex-col gap-1'>
+              <button
+                type='button'
+                // onClick={}
+                className='flex rounded-lg bg-orange-300 border border-black px-2 py-[2px] hover:bg-orange-500 active:bg-orange-500'
+              >
+                <PiUserSwitchDuotone />
+              </button>
+              <button
+                type='button'
+                onClick={() => deleteContact(id, name)}
+                className='flex rounded-lg bg-rose-300 border border-black px-2 py-[2px] hover:bg-rose-500 active:bg-rose-500'
+              >
+                <PiUserCircleMinusDuotone />
+              </button>
+            </div>
           </li>
         ))
       ) : (

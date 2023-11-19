@@ -9,7 +9,9 @@ import Button from '@mui/material/Button';
 import { useContactsFormValidation } from '../hooks/useContactFormValidation';
 
 export const ContactForm = () => {
+
   const dispatch = useDispatch();
+  
   const contacts = useSelector(selectContacts);
   const { handleSubmit, reset, registerName, registerNumber, errorMessage } =
     useContactsFormValidation();
