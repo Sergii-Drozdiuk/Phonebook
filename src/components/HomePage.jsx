@@ -7,11 +7,11 @@ export const HomePage = () => {
       <img src={homeImage} alt='Welcome' />
       <p className='mt-3 text-l text-center'>
         Already have an account?
-        <Link href='/login' variant='body2' sx={{ mx: 1 }}>
+        <Link href='/goit-react-hw-08-phonebook/login' variant='body2' sx={{ mx: 1 }}>
           Sign in
         </Link>
         or
-        <Link href='/register' variant='body2' sx={{ mx: 1 }}>
+        <Link href='/goit-react-hw-08-phonebook/register' variant='body2' sx={{ mx: 1 }}>
           register.
         </Link>
       </p>
