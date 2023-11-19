@@ -11,7 +11,7 @@ export const HomePage = () => {
           Sign In
         </Link>
         or
-        <Link href='/register' className='text-blue-500 mx-2'>
+        <Link to='/register' className='text-blue-500 mx-2'>
           register.
         </Link>
       </p>
