@@ -1,4 +1,4 @@
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import homeImage from '../Images/Bg.webp';
 
 export const HomePage = () => {
@@ -7,11 +7,11 @@ export const HomePage = () => {
       <img src={homeImage} alt='Welcome' />
       <p className='mt-3 text-l text-center'>
         Already have an account?
-        <Link href='/goit-react-hw-08-phonebook/login' variant='body2' sx={{ mx: 1 }}>
-          Sign in
+        <Link to='/login' className='text-blue-500 mx-2'>
+          Sign In
         </Link>
         or
-        <Link href='/goit-react-hw-08-phonebook/register' variant='body2' sx={{ mx: 1 }}>
+        <Link href='/register' className='text-blue-500 mx-2'>
           register.
         </Link>
       </p>
