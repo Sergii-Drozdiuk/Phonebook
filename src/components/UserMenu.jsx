@@ -8,7 +8,7 @@ export const UserMenu = () => {
 
   return (
     <div className='flex gap-3 text-white'>
-      <p>Welcome, {user.name}!</p>
+      <p className='hidden sm:block'>Welcome, {user.name}!</p>
       <button
         type='button'
         onClick={() => dispatch(logOut())}

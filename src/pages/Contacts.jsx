@@ -20,16 +20,16 @@ export default function Contacts() {
   }, [dispatch]);
 
   return (
-    <div className='flex justify-center gap-2'>
+    <div className='m-auto sm:flex sm:justify-center sm:gap-2'>
       {isLoading && <Loader />}
-      <div className='w-[310px] rounded-lg border p-3 min-[375px]:w-[365px]'>
+      <div className='min-w-[240px] rounded-lg border p-3 min-[375px]:w-[365px]'>
         <h1 className='mb-4 flex items-center justify-center gap-2 text-2xl'>
           <FcBusinessContact />
           Phonebook
         </h1>
         <ContactForm />
       </div>
-      <div className='w-[310px] rounded-lg border p-3 min-[375px]:w-[365px]'>
+      <div className='min-w-[240px] rounded-lg border p-3 mt-2 min-[375px]:w-[365px] sm:mt-0'>
         <h2 className='mb-4 flex items-center justify-center gap-2 text-xl'>
           <PiAddressBookDuotone />
           Contacts

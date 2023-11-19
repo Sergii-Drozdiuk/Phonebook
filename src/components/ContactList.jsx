@@ -21,7 +21,7 @@ export const ContactList = () => {
   };
 
   return (
-    <ul className='max-h-[55vh] overflow-y-auto scrollbar-none'>
+    <ul className='sm:max-h-[70vh] overflow-y-auto scrollbar-none'>
       {visibleContacts.length ? (
         visibleContacts.map(({ id, name, number }) => (
           <li key={id} className='mb-2 flex items-center justify-between gap-2'>
@@ -32,7 +32,7 @@ export const ContactList = () => {
             <button
               type='button'
               onClick={() => deleteContact(id, name)}
-              className='flex rounded-lg bg-rose-500 px-2 py-[2px] hover:bg-rose-700 hover:stroke-black active:bg-rose-700 max-[375px]:text-xs max-[375px]:gap-1'
+              className='flex rounded-lg bg-rose-300 border border-black px-2 py-[2px] hover:bg-rose-500 active:bg-rose-500 max-[375px]:text-xs max-[375px]:gap-1'
             >
               <PiUserCircleMinusDuotone />
             </button>
