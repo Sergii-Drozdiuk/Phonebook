@@ -12,7 +12,7 @@ const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
-export const register = createAsyncThunk('auth/register', async (credentials, thunkAPI) => {
+export const register = createAsyncThunk('auth/register', async (credentials, herokuApi) => {
   try {
     const { data } = await axios.post('/users/signup', credentials);
     // After successful registration, add the token to the HTTP header
@@ -20,7 +20,7 @@ export const register = createAsyncThunk('auth/register', async (credentials, th
     return data;
   } catch (error) {
     toast.error(error.message);
-    return thunkAPI.rejectWithValue(error.message);
+    return herokuApi.rejectWithValue(error.message);
   }
 });
 
@@ -28,7 +28,7 @@ export const register = createAsyncThunk('auth/register', async (credentials, th
  * POST @ /users/login
  * body: { email, password }
  */
-export const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
+export const logIn = createAsyncThunk('auth/login', async (credentials, herokuApi) => {
   try {
     const { data } = await axios.post('/users/login', credentials);
     // After successful login, add the token to the HTTP header
@@ -36,7 +36,7 @@ export const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI
     return data;
   } catch (error) {
     toast.error(error.message);
-    return thunkAPI.rejectWithValue(error.message);
+    return herokuApi.rejectWithValue(error.message);
   }
 });
 
@@ -44,26 +44,26 @@ export const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI
  * POST @ /users/logout
  * headers: Authorization: Bearer token
  */
-export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+export const logOut = createAsyncThunk('auth/logout', async (_, herokuApi) => {
   try {
     await axios.post('/users/logout');
     // After a successful logout, remove the token from the HTTP header
     clearAuthHeader();
   } catch (error) {
     toast.error(error.message);
-    return thunkAPI.rejectWithValue(error.message);
+    return herokuApi.rejectWithValue(error.message);
   }
 });
 
-export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
+export const refreshUser = createAsyncThunk('auth/refresh', async (_, herokuApi) => {
   // Reading the token from the state via getState()
-  const state = thunkAPI.getState();
+  const state = herokuApi.getState();
   const persistedToken = state.auth.token;
 
   if (persistedToken === null) {
     // If there is no token, exit without performing any request
     toast.error('Unable to fetch user');
-    return thunkAPI.rejectWithValue('Unable to fetch user');
+    return herokuApi.rejectWithValue('Unable to fetch user');
   }
 
   try {
@@ -73,6 +73,6 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
     return data;
   } catch (error) {
     toast.error(error.message);
-    return thunkAPI.rejectWithValue(error.message);
+    return herokuApi.rejectWithValue(error.message);
   }
 });

@@ -7,8 +7,7 @@ import { ContactList } from '../components/ContactList';
 import { Loader } from '../components/Loader';
 import { Error } from '../components/Error';
 import { fetchContacts } from '../redux/contacts/operations.jsx';
-import { FcBusinessContact } from 'react-icons/fc';
-import { PiAddressBookDuotone } from 'react-icons/pi';
+import { PiAddressBookFill } from 'react-icons/pi';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -24,14 +23,14 @@ export default function Contacts() {
       {isLoading && <Loader />}
       <div className='min-w-[240px] rounded-lg border p-3 min-[375px]:w-[365px]'>
         <h1 className='mb-4 flex items-center justify-center gap-2 text-2xl'>
-          <FcBusinessContact />
+          <img src='../../public/phonebook.svg' width={24} height={24} alt='logo' />
           Phonebook
         </h1>
         <ContactForm />
       </div>
       <div className='min-w-[240px] rounded-lg border p-3 mt-2 min-[375px]:w-[365px] sm:mt-0'>
         <h2 className='mb-4 flex items-center justify-center gap-2 text-xl'>
-          <PiAddressBookDuotone />
+          <PiAddressBookFill />
           Contacts
         </h2>
         {error && <Error />}
