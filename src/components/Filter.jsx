@@ -16,6 +16,7 @@ export const Filter = () => {
           value={filter}
           label='Find contacts by name'
           type='text'
+          name='filter'
           onChange={e => dispatch(changeFilter(e.target.value))}
           className='rounded-lg pl-2 text-black'
         ></TextField>

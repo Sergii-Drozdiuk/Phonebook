@@ -61,8 +61,7 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, herokuApi)
   const persistedToken = state.auth.token;
 
   if (persistedToken === null) {
-    // If there is no token, exit without performing any request
-    toast.error('Unable to fetch user');
+    // If there is no token, exit without performing any requests
     return herokuApi.rejectWithValue('Unable to fetch user');
   }
 

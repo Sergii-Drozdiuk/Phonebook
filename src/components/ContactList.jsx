@@ -7,7 +7,7 @@ import {
 } from 'react-icons/pi';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { selectVisibleContacts } from '../redux/contacts/selectors';
 import { delContact } from '../redux/contacts/operations';
 import { fetchContacts } from '../redux/contacts/operations';
@@ -15,7 +15,6 @@ import { fetchContacts } from '../redux/contacts/operations';
 export const ContactList = () => {
   const dispatch = useDispatch();
   const visibleContacts = useSelector(selectVisibleContacts);
-  const [contacts, setContacts] = useState(visibleContacts);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -24,10 +23,7 @@ export const ContactList = () => {
   const deleteContact = (id, name) => {
     toast.success(`${name} has been successfully deleted from your contacts`);
     dispatch(delContact(id)).then(() => {
-      const updatedContacts = contacts.filter(contact => {
-        contact.id !== id;
-      });
-      setContacts(updatedContacts);
+      dispatch(fetchContacts());
     });
   };
 
