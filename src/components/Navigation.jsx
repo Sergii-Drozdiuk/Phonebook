@@ -14,7 +14,7 @@ export const Navigation = () => {
   return (
     <nav className='flex gap-3 text-white'>
       <Link to='/'>
-        <img src='../../public/phonebook.svg' width={24} height={24} alt='logo' />
+        <img src='./phonebook.svg' width={24} height={24} alt='logo' />
       </Link>
       <Link to='/' className='hover:scale-105 hover:underline focus:scale-105 focus:underline'>
         Home
