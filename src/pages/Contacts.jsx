@@ -23,7 +23,7 @@ export default function Contacts() {
       {isLoading && <Loader />}
       <div className='min-w-[240px] rounded-lg border p-3 min-[375px]:w-[365px]'>
         <h1 className='mb-4 flex items-center justify-center gap-2 text-2xl'>
-          <img src='./public/phonebook.svg' width={24} height={24} alt='logo' />
+          <img src='./phonebook.svg' width={24} height={24} alt='logo' />
           Phonebook
         </h1>
         <ContactForm />
