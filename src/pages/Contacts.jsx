@@ -29,8 +29,8 @@ export default function Contacts() {
         <ContactForm />
       </div>
       <div className='min-w-[240px] rounded-lg border p-3 mt-2 min-[375px]:w-[365px] sm:mt-0'>
-        <h2 className='mb-4 flex items-center justify-center gap-2 text-xl'>
-          <PiAddressBookFill />
+        <h2 className='mb-4 flex items-center justify-center gap-2 text-2xl'>
+          <PiAddressBookFill width={24} height={24} />
           Contacts
         </h2>
         {error && <Error />}

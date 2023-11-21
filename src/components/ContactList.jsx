@@ -1,13 +1,16 @@
-import {
-  PiUserCircleMinusDuotone,
-  PiUserFocusDuotone,
-  PiUserCircleDuotone,
-  PiPhoneDuotone,
-  // PiUserSwitchDuotone,
-} from 'react-icons/pi';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { useEffect } from 'react';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { selectVisibleContacts } from '../redux/contacts/selectors';
 import { delContact } from '../redux/contacts/operations';
 import { fetchContacts } from '../redux/contacts/operations';
@@ -27,44 +30,46 @@ export const ContactList = () => {
     });
   };
 
+  const Demo = styled('div')(({ theme }) => ({
+    backgroundColor: theme.palette.background.paper,
+  }));
+
   return (
-    <ul className='sm:max-h-[70vh] overflow-y-auto scrollbar-none'>
-      {visibleContacts.length ? (
-        visibleContacts.map(({ id, name, number }) => (
-          <li
-            key={id}
-            className='mb-2 py-1 border rounded border-grey hover:border-black flex items-center justify-around gap-2'
-          >
-            <PiUserFocusDuotone style={{ fontSize: '50px' }} />
-            <div className='w-3/5'>
-              <span className='flex overflow-hidden'>
-                <PiUserCircleDuotone style={{ fontSize: '20px', marginRight: '8px' }} /> {name}
-              </span>
-              <span className='flex overflow-hidden '>
-                <PiPhoneDuotone style={{ fontSize: '20px', marginRight: '8px' }} /> {number}
-              </span>
-            </div>
-            <div className='flex flex-col gap-1'>
-              {/* <button
-                type='button'
-                // onClick={}
-                className='flex rounded-lg bg-orange-400 border border-grey px-2 py-[2px] hover:bg-orange-500 hover:border-black focus:bg-orange-500'
+    <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+      <Demo>
+        <List className='sm:max-h-[70vh] overflow-y-auto scrollbar-none'>
+          {visibleContacts.length ? (
+            visibleContacts.map(({ id, name, number }) => (
+              <ListItem
+                key={id}
+                sx={{ paddingTop: '0px', paddingBottom: '0px' }}
+                secondaryAction={
+                  <IconButton
+                    edge='end'
+                    aria-label='delete'
+                    onClick={() => deleteContact(id, name)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                }
               >
-                <PiUserSwitchDuotone />
-              </button> */}
-              <button
-                type='button'
-                onClick={() => deleteContact(id, name)}
-                className='flex rounded-lg bg-red-400 border border-grey px-2 py-[2px] hover:bg-red-500 focus:bg-red-500'
-              >
-                <PiUserCircleMinusDuotone />
-              </button>
-            </div>
-          </li>
-        ))
-      ) : (
-        <p className='text-center'>Contacts not found</p>
-      )}
-    </ul>
+                <ListItemAvatar>
+                  <Avatar>
+                    <PersonOutlineIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={name}
+                  secondary={number}
+                  sx={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
+                />
+              </ListItem>
+            ))
+          ) : (
+            <p className='text-center'>Contacts not found</p>
+          )}
+        </List>
+      </Demo>
+    </Box>
   );
 };
