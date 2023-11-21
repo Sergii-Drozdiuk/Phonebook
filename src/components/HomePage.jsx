@@ -4,7 +4,7 @@ import homeImage from '../Images/Bg.webp';
 export const HomePage = () => {
   return (
     <div>
-      <img src={homeImage} alt='Welcome' />
+      <img src={homeImage} alt='Welcome' className='w-full h-full' />
       <p className='mt-3 text-l text-center'>
         Already have an account?
         <Link to='/login' className='text-blue-500 mx-2'>
