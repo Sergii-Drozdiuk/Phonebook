@@ -3,7 +3,7 @@ import {
   PiUserFocusDuotone,
   PiUserCircleDuotone,
   PiPhoneDuotone,
-  PiUserSwitchDuotone,
+  // PiUserSwitchDuotone,
 } from 'react-icons/pi';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
@@ -45,17 +45,17 @@ export const ContactList = () => {
               </span>
             </div>
             <div className='flex flex-col gap-1'>
-              <button
+              {/* <button
                 type='button'
                 // onClick={}
                 className='flex rounded-lg bg-orange-400 border border-grey px-2 py-[2px] hover:bg-orange-500 hover:border-black focus:bg-orange-500'
               >
                 <PiUserSwitchDuotone />
-              </button>
+              </button> */}
               <button
                 type='button'
                 onClick={() => deleteContact(id, name)}
-                className='flex rounded-lg bg-red-400 border border-grey px-2 py-[2px] hover:bg-red-500 hover:border-black focus:bg-red-500'
+                className='flex rounded-lg bg-red-400 border border-grey px-2 py-[2px] hover:bg-red-500 focus:bg-red-500'
               >
                 <PiUserCircleMinusDuotone />
               </button>
