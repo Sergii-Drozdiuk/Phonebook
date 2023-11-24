@@ -3,10 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/Sergii-Drozdiuk/goit-react-hw-08-phonebook",
+  "homepage": "https://github.com/Sergii-Drozdiuk/Phonebook",
   "scripts": {
     "d": "npm run lint && vite --open",
-    "b": "vite build --base=/goit-react-hw-08-phonebook/",
+    "b": "vite build --base=/Phonebook",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src"
   },
