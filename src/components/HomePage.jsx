@@ -7,7 +7,7 @@ export const HomePage = () => {
   const { isLoggedIn } = useAuth();
   const dispatch = useDispatch();
   return (
-    <div className="flex min-h-[calc(100vh-112px)] flex-col justify-between bg-[url('src/images/Phone_with_phonebook.png')] bg-contain bg-center bg-no-repeat p-4">
+    <div className="flex min-h-[calc(100vh-112px)] flex-col justify-between bg-[url('/images/Phone_with_phonebook.png')] bg-contain bg-center bg-no-repeat p-4">
       <div>
         <h1 className='m-auto text-center max-[767px]:text-2xl max-[375px]:text-xl min-[768px]:text-3xl'>
           This is PhoneBook app for your contacts.
