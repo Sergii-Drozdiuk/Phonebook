@@ -29,3 +29,15 @@ export const delContact = createAsyncThunk('contacts/deleteContact', async (id, 
     return herokuApi.rejectWithValue(error.message);
   }
 });
+
+export const updateContact = createAsyncThunk(
+  'contacts/updateContact',
+  async ({ id, name, number }, herokuApi) => {
+    try {
+      const response = await axios.patch(`/contacts/${id}`, { name, number });
+      return response.data;
+    } catch (error) {
+      return herokuApi.rejectWithValue(error.message);
+    }
+  }
+);

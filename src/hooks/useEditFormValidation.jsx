@@ -23,7 +23,7 @@ const schema = yup.object({
     .min(9, 'Please enter at least 9 digits'),
 });
 
-export const useContactsFormValidation = () => {
+export const useEditFormValidation = () => {
   const {
     handleSubmit,
     reset,
@@ -32,11 +32,11 @@ export const useContactsFormValidation = () => {
   } = useForm({ reValidateMode: 'onChange', resolver: yupResolver(schema) });
 
   const errorMessage = field =>
-    errors[field] && <small className='mt-2'>{errors[field]?.message}</small>;
+    errors[field] && <small className='p-error mt-2'>{errors[field]?.message}</small>;
 
-  const registerName = register('name');
+  const editName = register('name');
 
-  const registerNumber = register('number');
+  const editNumber = register('number');
 
-  return { handleSubmit, reset, registerName, registerNumber, errorMessage };
+  return { handleSubmit, reset, editName, editNumber, errorMessage };
 };

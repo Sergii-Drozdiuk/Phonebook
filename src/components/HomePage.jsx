@@ -1,26 +1,46 @@
 import { Link } from 'react-router-dom';
-import homeImage from '../Images/Bg.webp';
 import { useAuth } from '../hooks/useAuth';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../redux/auth/operations';
 
 export const HomePage = () => {
   const { isLoggedIn } = useAuth();
+  const dispatch = useDispatch();
   return (
-    <div className='relative'>
-      <img src={homeImage} alt='Welcome' loading='lazy' className='w-full h-full' />
-      {!isLoggedIn ? (
-        <p className='mt-3 text-white sm:text-xl text-center absolute bottom-0.5 sm:bottom-2 left-5 max-[800px]:text-sm max-[405px]:text-xs max-[375px]:text-[10px]'>
-          Already have an account?
-          <Link to='/login' className='text-blue-500 mx-2'>
-            Sign In
-          </Link>
-          or
-          <Link to='/register' className='text-blue-500 mx-2'>
-            register.
-          </Link>
+    <div className="flex min-h-[calc(100vh-112px)] flex-col justify-between bg-[url('./images/Phone_with_phonebook.png')] bg-contain bg-center bg-no-repeat p-4">
+      <div>
+        <h1 className='m-auto text-center max-[767px]:text-2xl max-[375px]:text-xl min-[768px]:text-3xl'>
+          This is PhoneBook app for your contacts.
+        </h1>
+        <p className='m-auto mt-3 text-center max-[767px]:text-xl max-[375px]:text-lg min-[768px]:text-2xl'>
+          Keep your contacts safe!
         </p>
-      ) : (
-        ''
-      )}
+      </div>
+      <div>
+        {!isLoggedIn ? (
+          <p className='m-auto mt-3 text-center max-[767px]:text-xl max-[375px]:text-lg min-[768px]:text-2xl'>
+            Please
+            <Link to='/register' className='mx-2 text-blue-500 hover:underline focus:underline'>
+              register
+            </Link>
+            to get started use this app. <br /> Already have an account?
+            <Link to='/login' className='mx-2 text-blue-500 hover:underline focus:underline'>
+              Sign In!
+            </Link>
+          </p>
+        ) : (
+          <p className='mt-3 text-center max-[767px]:text-xl max-[375px]:text-lg min-[768px]:text-2xl'>
+            Would you like to log in to another account?
+            <button
+              type='button'
+              onClick={() => dispatch(logOut())}
+              className='mx-2 text-blue-500 hover:underline focus:underline'
+            >
+              Logout
+            </button>
+          </p>
+        )}
+      </div>
     </div>
   );
 };

@@ -13,7 +13,6 @@ import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import { register } from '../redux/auth/operations';
 import { useRegisterFormValidation } from '../hooks/useRegisterFormValidation';
-import { Copyright } from '../utils/copyright';
 
 const defaultTheme = createTheme();
 
@@ -31,11 +30,18 @@ export const RegisterForm = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component='main' maxWidth='xs'>
+      <Container
+        component='main'
+        maxWidth='xs'
+        sx={{
+          minHeight: 'calc(100vh - 168px)',
+          background: 'white',
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            py: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -89,15 +95,18 @@ export const RegisterForm = () => {
             </Button>
             <Grid container justifyContent='flex-end'>
               <Grid item>
-                <Link href='/login' variant='body2'>
+                <Link
+                  href='login#/login'
+                  variant='body2'
+                  sx={{
+                    fontSize: '16px',
+                  }}
+                >
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
           </Box>
-        </Box>
-        <Box mt={5}>
-          <Copyright />
         </Box>
       </Container>
     </ThemeProvider>

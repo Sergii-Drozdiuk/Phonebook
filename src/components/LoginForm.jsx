@@ -15,7 +15,6 @@ import { useDispatch } from 'react-redux';
 import { logIn } from '../redux/auth/operations';
 import toast from 'react-hot-toast';
 import { useLoginFormValidation } from '../hooks/useLoginFormValidation';
-import { Copyright } from '../utils/copyright';
 
 const defaultTheme = createTheme();
 
@@ -33,7 +32,7 @@ export const LoginForm = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component='main' sx={{ height: '100vh' }}>
+      <Grid container component='main' sx={{ minHeight: 'calc(100vh - 112px)' }}>
         <CssBaseline />
         <Grid
           item
@@ -52,8 +51,8 @@ export const LoginForm = () => {
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
-              my: 8,
-              mx: 4,
+              py: 8,
+              px: 2,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -99,12 +98,17 @@ export const LoginForm = () => {
               </Button>
               <Grid container justifyContent='flex-end'>
                 <Grid item>
-                  <Link href='/register' variant='body2'>
+                  <Link
+                    href='login#/register'
+                    variant='body2'
+                    sx={{
+                      fontSize: '16px',
+                    }}
+                  >
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
         </Grid>
